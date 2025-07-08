@@ -1,0 +1,96 @@
+{
+  "name": "Daily Motivational Quote.",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2907535f-852a-40c8-80f4-4dfb19bd61b1",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": " https://zenquotes.io/api/random",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "dd426ebf-4a97-469d-90d7-0d762233b376",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "chatId": "682492049",
+        "text": "={{$json[\"q\"]}} — {{$json[\"a\"]}}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        440,
+        0
+      ],
+      "id": "b55ae1cb-e0cf-4a8a-9875-3903d0acba93",
+      "name": "Send a text message",
+      "webhookId": "7bbe9a9e-74e8-435f-bc52-93d41cb2cf8e",
+      "credentials": {
+        "telegramApi": {
+          "id": "wiimPsCp7eUMiP2t",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "dbd4831c-7573-4bd8-bceb-e745a71118c9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "19cde85c277ec50ac4cfa3e0434a5841f5d9cf456cbfbb81614c64149afa2c1c"
+  },
+  "id": "W4pk8dIzrxiIvWsV",
+  "tags": []
+}
